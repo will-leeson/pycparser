@@ -50,6 +50,9 @@ class CGenerator(object):
             ret += ' ' + n.string
         return ret
 
+    def visit_PreprocessorDirective(self, n):
+        return n.val
+
     def visit_ArrayRef(self, n):
         arrref = self._parenthesize_unless_simple(n.name)
         return arrref + '[' + self.visit(n.subscript) + ']'
