@@ -251,6 +251,23 @@ class BinaryOp(Node):
 
     attr_names = ('op', )
 
+class PreprocessorDirective(Node):
+    __slots__ = ('val', 'coord', '__weakref__')
+    def __init__(self, val, coord=None):
+        self.val = val
+        self.coord = coord
+
+    def children(self):
+        nodelist = []
+        if self.val is not None: nodelist.append(("val", self.val))
+        return tuple(nodelist)
+
+    def __iter__(self):
+        if self.val is not None:
+            yield self.val
+
+    attr_names = ()
+
 class Break(Node):
     __slots__ = ('coord', '__weakref__')
     def __init__(self, coord=None):
